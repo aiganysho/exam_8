@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webapp',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/uploads/'
+
+LOGOUT_REDIRECT_URL = 'product:list'
+LOGIN_REDIRECT_URL = 'product:list'
+LOGIN_URL = 'accounts:login'
