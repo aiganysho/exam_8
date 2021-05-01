@@ -13,6 +13,14 @@
     <nav class="navbar">
         <ul class="menu">
             <li><a href="{% url "product:list" %}">Product list</a></li>
+            {% if user.is_authenticated %}
+                {% block menu_links %}{% endblock %}
+                <li class="menu-right"><a href="{% url 'accounts:logout' %}?next={{ request.get_full_path }}">Logout</a></li>
+                {% else %}
+                <li class="menu-right"><a href="{% url 'accounts:login' %}?next={{ request.get_full_path }}">Login</a></li>
+                <li class="menu-right"><a href="{% url 'accounts:create' %}?next={{ request.get_full_path }}">Registration</a></li>
+
+            {% endif %}
             {% block menu %}{% endblock %}
         </ul>
     </nav>
