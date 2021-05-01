@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="{% url "product:update" product.id %}" method="POST">
+        {% include "partial/form.html" with button_text="Edite" %}
+    </form>
+{%  endblock content %}

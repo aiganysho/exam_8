@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block page_header %} Are you sure to delete {{ product.name_product }}? {% endblock page_header %}
+
+{%  block content %}
+     <form action="{% url "product:delete" product.id %}" method="POST">
+        <br>
+        {% include 'partial/form.html' with button_text="Yes" %}
+        <a href="{% url "product:view" product.id %}">Cancellation!</a>
+    </form>
+{% endblock content %}

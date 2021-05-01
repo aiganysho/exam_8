@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if not product_list %}
+        <h2> No Product</h2>
+        {% else %}
+    {% endif %}
+        <h1>List Product</h1>
+        </br>
+        <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Name</th>
+        </tr>
+      </thead>
+      <tbody>
+            {% for product in product_list %}
+            <tr>
+                <th>{{ product.id }}</th>
+                <td><a href="{% url "product:view" product.pk %}">{{ product.name_product }}</a></td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock content %}

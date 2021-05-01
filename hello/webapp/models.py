@@ -20,7 +20,7 @@ class Product(models.Model):
         verbose_name_plural = 'Продукты'
 
     def __str__(self):
-        return f'{self.id}, {self.name_product}'
+        return f'{self.id} {self.name_product}'
 
 
 class Review(models.Model):
