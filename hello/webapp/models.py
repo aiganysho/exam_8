@@ -5,7 +5,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 
-categories = (['книги', 'books'], ['фрукты', 'fruit'], ['аксессуары', 'accessories'], ['разное', 'others'])
+categories = (['одежда', 'clothes'], ['фрукты', 'fruit'], ['аксессуары', 'accessories'], ['разное', 'others'])
 
 
 class Product(models.Model):
@@ -24,7 +24,13 @@ class Product(models.Model):
 
 
 class Review(models.Model):
-    author = models.ManyToManyField(get_user_model(), related_name='reviews', null=False, blank=False, verbose_name='Автор')
+    author = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='reviews'
+    )
+
     product = models.ForeignKey(
         'webapp.Product',
         on_delete=models.CASCADE,
