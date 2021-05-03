@@ -26,18 +26,18 @@ class Product(models.Model):
 
 
     def get_avg_rating(self):
-        avg_rating = Review.objects.all().aggregate(Avg('rating'))
+        avg_rating = Review.objects.aggregate(Avg('rating'))
         for rate in self.reviews.all():
-             return round(avg_rating['rating__avg'], 1)
+            return round(avg_rating['rating__avg'], 1)
 
 
     # def get_avg_rating(self):
-    #         review = Review.objects.all()
-    #         count = len(review)
-    #         sum = 0
-    #         for review_avr in self.reviews.all():
-    #             sum += review_avr.rating
-    #         return (sum/count)
+    #     review = Review.objects.all('product')
+    #     count = len(review)
+    #     sum = 0
+    #     for review_avr in self.reviews.all():
+    #         sum += review_avr.rating
+    #     return (sum/count)
 
 
 class Review(models.Model):
@@ -58,7 +58,7 @@ class Review(models.Model):
     text_review = models.TextField(max_length=2000, null=False, blank=False, verbose_name='Текст отзыва')
     rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)], verbose_name='Оценка')
     moderation = models.BooleanField(null=False, blank=False, verbose_name='Отмодерирован')
-    create_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    create_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', null=True)
     update_at = models.DateTimeField(auto_now=True, verbose_name='Дата редактирования')
 
     class Meta:

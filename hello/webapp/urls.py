@@ -9,6 +9,7 @@ from webapp.views import (
     ReviewCreate,
     ReviewUpdate,
     ReviewDelete,
+    ReviewDetail
 )
 
 
@@ -24,5 +25,6 @@ urlpatterns = [
     path('<int:pk>/review/create/', ReviewCreate.as_view(), name='create_review'),
     path('<int:pk>/review/update/', ReviewUpdate.as_view(), name='update_review'),
     path('<int:pk>/review/delete/', ReviewDelete.as_view(), name='delete_review'),
+    # path('<int:pk>/review/detail/', ReviewDelete.as_view(), name='detail_review'),
 
 ]

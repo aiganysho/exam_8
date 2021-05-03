@@ -12,5 +12,4 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = Review
-        fields = ('text_review', )
-        exclude = ('moderation', )
+        fields = ('text_review', 'rating', 'moderation', )

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+}
+
+{%  block content %}
+     <form action="{% url "product:delete" review.id %}" method="POST">
+        <br>
+        {% include 'partial/form.html' with button_text="Yes" %}
+        <a href="{% url "product:view" review.id %}">Cancellation!</a>
+    </form>
+{% endblock content %}

@@ -5,7 +5,7 @@ from .models import Profile
 
 
 class ProfileInline(admin.StackedInline):
-    fields = ('username', )
+    fields = ('name', )
     model = Profile
 
 

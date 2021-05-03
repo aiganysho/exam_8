@@ -11,4 +11,5 @@ from webapp.views.review import (
     ReviewCreate,
     ReviewUpdate,
     ReviewDelete,
+    ReviewDetail
 )

@@ -14,6 +14,12 @@ class ReviewList(ListView):
     model = Review
     context_object_name = 'review_list'
 
+class ReviewDetail(DetailView):
+    template_name = 'product/view_product.html.html'
+    context_key = 'review'
+    model = Review
+
+
 
 class ReviewCreate(CreateView):
     template_name = 'product/create_product.html'
@@ -34,23 +40,11 @@ class ReviewCreate(CreateView):
         review.author = self.request.user
 
         return super().form_valid(form)
-    #
-    #
-    # def get_avg(self):
-    #     context = Review.objects.filter(product=self).aggregate(average=Avg('rate'))
-    #     avg = 0
-    #     if context['average'] is not None:
-    #         avg = float(context['average'])
-    #         return avg
-    #     context['average'] = context
-    #     return context
-
-
 
 
 class ReviewUpdate(UpdateView):
     model = Review
-    template_name = 'product/update_product.html'
+    template_name = 'product/update_review.html'
     form_class = ReviewForm
     context_key = 'review'
 
@@ -60,9 +54,17 @@ class ReviewUpdate(UpdateView):
             kwargs={'pk': self.object.pk}
         )
 
+    def form_valid(self, form):
+        product = get_object_or_404(Product, id=self.kwargs.get('pk'))
+
+        review = form.instance
+        review.product = product
+        review.author = self.request.user
+
+        return super().form_valid(form)
+
 class ReviewDelete(DeleteView):
-    template_name = 'product/delete_product.html'
+    template_name = 'product/delete_review.html'
     model = Review
     context_key = 'review'
     success_url = reverse_lazy('product:view')
-

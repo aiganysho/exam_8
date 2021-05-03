@@ -10,6 +10,7 @@ class Profile(models.Model):
         verbose_name='Профиль пользователя',
         related_name='profile'
     )
+    name = models.CharField(max_length=100, null=True)
 
     class Meta:
         db_table = 'profiles'

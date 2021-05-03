@@ -15,4 +15,14 @@
     <p>Имя: {{ user_obj.first_name }}</p>
     <p>Фамилия: {{ user_obj.last_name }}</p>
     <p>Почта: {{ user_obj.email }}</p>
+
+
+            <h2>Reviews:</h2>
+    {% for review in user_obj.reviews.all %}
+           <p> {{ review.author}} </p>
+            <p>{{ review.text_review }}</p>
+                </br>
+    {% empty %}
+        <p>No reviews :(</p>
+    {% endfor %}
 {% endblock %}
