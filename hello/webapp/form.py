@@ -7,8 +7,10 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = ('name_product', 'category', 'description', 'picture')
 
+
 class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = Review
         fields = ('text_review', )
+        exclude = ('moderation', )

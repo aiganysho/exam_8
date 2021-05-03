@@ -1,0 +1,18 @@
+
+{% extends 'base.html' %}
+{% block title %}Пользователь{% endblock %}
+
+{% block menu %}
+    {% if user == user_obj %}
+        <li class="menu_right"><a href="{% url 'accounts:user-password-change'  %}">Сменить пароль</a></li>
+        <li class="menu_right"><a href="{% url 'accounts:user-change' %}">Редактировать профиль</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <p>Имя пользователя: {{ user_obj.username }}</p>
+    <p>Имя: {{ user_obj.first_name }}</p>
+    <p>Фамилия: {{ user_obj.last_name }}</p>
+    <p>Почта: {{ user_obj.email }}</p>
+{% endblock %}

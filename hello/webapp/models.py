@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db.models import Avg
+
 
 
 # Create your models here.
@@ -23,6 +25,21 @@ class Product(models.Model):
         return f'{self.id} {self.name_product}'
 
 
+    def get_avg_rating(self):
+        avg_rating = Review.objects.all().aggregate(Avg('rating'))
+        for rate in self.reviews.all():
+             return round(avg_rating['rating__avg'], 1)
+
+
+    # def get_avg_rating(self):
+    #         review = Review.objects.all()
+    #         count = len(review)
+    #         sum = 0
+    #         for review_avr in self.reviews.all():
+    #             sum += review_avr.rating
+    #         return (sum/count)
+
+
 class Review(models.Model):
     author = models.ForeignKey(
         get_user_model(),
@@ -34,7 +51,7 @@ class Review(models.Model):
     product = models.ForeignKey(
         'webapp.Product',
         on_delete=models.CASCADE,
-        related_name='product_review',
+        related_name='reviews',
         null=False,
         blank=False
     )
@@ -51,3 +68,9 @@ class Review(models.Model):
 
     def __str__(self):
         return f'{self.author}: {self.text_review}'
+
+    # def ratings(self):
+    #     if self.rating is None:
+    #         return 0
+    #     else:
+    #         return self.get_avg_rating
