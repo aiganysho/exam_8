@@ -5,3 +5,10 @@ from webapp.views.product import (
     ProductUpdate,
     ProductDelete,
 )
+
+from webapp.views.review import (
+    ReviewList,
+    ReviewCreate,
+    ReviewUpdate,
+    ReviewDelete,
+)
