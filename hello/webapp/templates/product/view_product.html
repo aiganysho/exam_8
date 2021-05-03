@@ -4,12 +4,36 @@
     <li><a href="{% url "product:create" %}">Create</a></li>
     <li><a href="{% url "product:update" product.pk%}">Update</a></li>
     <li><a href="{% url "product:delete" product.pk%}">Delete</a></li>
+{#    <li><a href="{% url "product:create_review" product.pk%}">Create review</a></li>#}
+{#    <li><a href="{% url "product:update_review" product.pk%}">Update review</a></li>#}
+{#    <li><a href="{% url "product:delete_review" product.pk%}">Delete review</a></li>#}
 {% endblock menu %}
 
 
 {% block content %}
+        <p><div class="star-rating">
+            <i class="fas fa-star{% if product.get_avg_rating < 1 %}-o empty{%endif%}"></i>
+            <i class="fas fa-star{% if product.get_avg_rating < 2 %}-o empty{%endif%}"></i>
+            <i class="fas fa-star{% if product.get_avg_rating < 3 %}-o empty{%endif%}"></i>
+            <i class="fas fa-star{% if product.get_avg_rating < 4 %}-o empty{%endif%}"></i>
+            <i class="fas fa-star{% if product.get_avg_rating < 5 %}-o empty{%endif%}"></i>
+        </div></p>
     <p>Name: {{ product.name_product }}</p>
     <p>Description: {{ product.description }}</p>
     <p>Category: {{ product.category }}</p>
     <p>Picture: {{ product.picture }}</p>
+
+
+
+
+        <h2>Reviews:</h2>
+    {% for review in product.reviews.all %}
+        <p>{{ review.author }} ( {{ review.product.email }}):</p>
+        <p>{{ review.text_review }}</p>
+        <p>Rating: {{ review.rating }}</p>
+
+    {% empty %}
+        <p>No reviews :(</p>
+    {% endfor %}
+
 {%  endblock content %}

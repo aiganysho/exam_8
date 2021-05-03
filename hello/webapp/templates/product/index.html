@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block menu %}
+        <li><a href="{% url "accounts:user-list" %}">Пользователь</a></li>
+{% endblock menu %}
+
 {% block content %}
     {% if not product_list %}
         <h2> No Product</h2>
@@ -12,6 +16,7 @@
         <tr>
           <th scope="col">id</th>
           <th scope="col">Name</th>
+          <th scope="col">Rating</th>
         </tr>
       </thead>
       <tbody>
@@ -19,6 +24,19 @@
             <tr>
                 <th>{{ product.id }}</th>
                 <td><a href="{% url "product:view" product.pk %}">{{ product.name_product }}</a></td>
+                <td>
+                    {% if product.get_avg_rating is None%}
+                    {% else %}
+                    <div class="star-rating">
+                        <i class="fas fa-star{% if product.get_avg_rating < 1 %}-o empty{%endif%}"></i>
+                        <i class="fas fa-star{% if product.get_avg_rating < 2 %}-o empty{%endif%}"></i>
+                        <i class="fas fa-star{% if product.get_avg_rating < 3 %}-o empty{%endif%}"></i>
+                        <i class="fas fa-star{% if product.get_avg_rating < 4 %}-o empty{%endif%}"></i>
+                        <i class="fas fa-star{% if product.get_avg_rating < 5 %}-o empty{%endif%}"></i>
+                    </div>
+                    {{ product.get_avg_rating}}
+                    {% endif %}
+                </td>
             </tr>
         {% endfor %}
       </tbody>
